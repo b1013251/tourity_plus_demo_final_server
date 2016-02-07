@@ -18,8 +18,8 @@ exports.connection = function() {
     function(callback) {
       con = mysql.createConnection({
         host     : 'localhost' ,
-        user     : 'node' ,
-        password : 'secret' ,
+        user     : 'plus' ,
+        password : '2015tourityplus' ,
         database : 'tourity',
         dateStrings: true
       });

@@ -67,12 +67,29 @@ module.exports = function (req , res ) {
            if(file.type == "image/jpeg") {
              console.log("写真がアップロードされた");
              var filename = file.path.split("/")[5];
-             fs.rename(file.path , settings.PATH + filename + mimeTypes[file.type] , function(err) {
+             fs.rename(file.path , settings.PATH + "/image/" + filename + mimeTypes[file.type] , function(err) {
                if(err) {
+                 console.log
                  fs.unlink(file.path + mimeTypes[file.type]);
-                 fs.rename(file.path , settings.PATH + filename + mimeTypes[file.type] );
+                 fs.rename(file.path , settings.PATH + "/image/" + filename + mimeTypes[file.type] );
                 }
              });
+
+             image_path = "/image/" + filename + mimeTypes[file.type]
+           }
+
+           if(file.type == "video/mpeg" || file.type == "video/mp4") {
+             console.log("動画がアップロードされた");
+             var filename = file.path.split("/")[5];
+             fs.rename(file.path , settings.PATH + "/movie/" + filename + mimeTypes[file.type] , function(err) {
+               if(err) {
+                 console.log
+                 fs.unlink(file.path + mimeTypes[file.type]);
+                 fs.rename(file.path , settings.PATH + "/movie/" + filename + mimeTypes[file.type] );
+                }
+             });
+
+            movie_path = "/movie/" + filename + mimeTypes[file.type]
            }
            /*
            fs.rename(file.path , file.path + mimeTypes[file.type] , function(err) {
